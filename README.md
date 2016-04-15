@@ -10,11 +10,11 @@
 Put the `_hw` file in the `fpath` directory.
 
 ```sh
-$ cp _hw /usr/local/share/zsh/site-functions/
+$ cp _hw /path/to/fpath-directory
 $ exec zsh
 ```
 
-Where the `fpath` directory is ?
+Where is the `fpath` directory ?
 
 ```sh
 $ echo "$fpath" | tr " " "\n"
