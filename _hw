@@ -1,0 +1,66 @@
+#compdef hw
+# ------------------------------------------------------------------------------
+# vim: ft=zsh sw=2 ts=2 et
+# ------------------------------------------------------------------------------
+# Description
+# -----------
+#
+#  Completion script for hw (https://github.com/tkengo/highway)
+#
+# ------------------------------------------------------------------------------
+#
+#  Version     : 0.1.0 (highway version 1.1.0)
+#  Author      : Yonchu <yuyuchu3333@gmail.com>
+#  License     : MIT License
+#  Repository  : https://github.com/yonchu/hw-zsh-completion
+#  Last Change : 15 Apr 2016.
+#
+#  Copyright (c) 2016 Yonchu.
+#
+# ------------------------------------------------------------------------------
+function _hw() {
+  local curcontext="$curcontext" state line ret=1
+  declare -A opt_args
+
+  # Don't complete if command doesn't exist
+  (( ! ${+commands[${words[1]}]} )) && return 0
+
+  # Base opts starts at highway version 1.1.0
+  hw_args=(
+    '(- 1 *)'{-h,--help}'[Show options help and some concept guides.]'
+    '(- 1 *)--version[Show version.]'
+    '(-a,--all-files)'{-a,--all-files}'[Search all files.]'
+    '(-e)-e[Parse PATTERN as a regular expression.]:pattern'
+    '(-f,--follow-link)'{-f,--follow-link}'[Follow symlinks.]'
+    '(-i,--ignore-case)'{-i,--ignore-case}'[Match case insensitively.]'
+    '(-w,--word-regexp)'{-w,--word-regexp}'[Only match whole words.]'
+    '(-l,--file-with-matches)'{-l,--file-with-matches}'[Only print filenames that contain matches.]'
+    '(-n,--line-number)'{-n,--line-number}'[Print line number with output lines.]'
+    '(-N,--no-line-number)'{-N,--no-line-number}"[Don't print line number.]"
+    '(--no-omit)--no-omit[Show all characters even if too long lines were matched. By default hw print only characters near by PATTERN if the line was too long.]'
+    '(--group)--group[Grouping matching lines every files.]'
+    '(--no-group)--no-group[No grouping.]'
+    '(--no-buffering)--no-buffering[No buffering. By default results is buffering while printing.]'
+    '(--color --no-color)--color[Highlight matching strings, filenames, line numbers.]'
+    '(--no-color --color --color-path --color-match --color-line-number --color-before-context --color-after-context)--no-color[No highlight.]'
+    '(--no-color)--color-path[Color for path names.]'
+    '(--no-color)--color-match[Color for matching strings.]'
+    '(--no-color)--color-line-number[Color for line numbers.]'
+    '(--no-color)--color-before-context[Color for line numbers of the before context.]'
+    '(--color-after-context)--color-after-context[Color for line numbers of the after context.]'
+    '(-A,--after-context)'{-A,--after-context}'[Print some lines after match.]:number'
+    '(-B,--before-context)'{-B,--before-context}'[Print some lines before match.]:number'
+    '(-C,--context)'{-C,--context}'[Print some lines before and after matches.]:number'
+  )
+  hw_args+=(
+    '*: :_files'
+  )
+
+  _arguments -C -s -S \
+    "${hw_args[@]}" \
+    && ret=0
+
+  return ret
+}
+
+_hw "$@"
