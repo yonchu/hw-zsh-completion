@@ -1,0 +1,46 @@
+Usage:
+  hw [OPTIONS] PATTERN [PATHS]
+
+The highway searches a PATTERN from all of files under your directory very fast.
+By default hw searches in under your current directory except hidden files and
+paths from .gitignore, but you can search any directories or any files you want
+to search by specifying the PATHS, and you can specified multiple directories or
+files to the PATHS options.
+
+Example:
+  hw hoge src/ include/ tmp/test.txt
+
+Search options:
+  -a, --all-files            Search all files.
+  -e                         Parse PATTERN as a regular expression.
+  -f, --follow-link          Follow symlinks.
+  -i, --ignore-case          Match case insensitively.
+  -w, --word-regexp          Only match whole words.
+
+Output options:
+  -l, --file-with-matches    Only print filenames that contain matches.
+  -n, --line-number          Print line number with output lines.
+  -N, --no-line-number       Don't print line number.
+      --no-omit              Show all characters even if too long lines were matched.
+                             By default hw print only characters near by PATTERN if
+                             the line was too long.
+      --group                Grouping matching lines every files.
+      --no-group             No grouping.
+      --no-buffering         No buffering. By default results is buffering while printing.
+
+Coloring options:
+      --color                Highlight matching strings, filenames, line numbers.
+      --no-color             No highlight.
+      --color-path           Color for path names.
+      --color-match          Color for matching strings.
+      --color-line-number    Color for line numbers.
+      --color-before-context Color for line numbers of the before context.
+      --color-after-context  Color for line numbers of the after context.
+
+Context control:
+  -A, --after-context        Print some lines after match.
+  -B, --before-context       Print some lines before match.
+  -C, --context              Print some lines before and after matches.
+
+  -h, --help                 Show options help and some concept guides.
+      --version              Show version.
